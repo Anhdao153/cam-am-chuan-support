@@ -1,0 +1,8 @@
+{
+  "name": "cam-am-chuan-support",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:privacy": "node scripts/build-privacy.mjs"
+  }
+}
