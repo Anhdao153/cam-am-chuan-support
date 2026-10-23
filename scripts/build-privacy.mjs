@@ -244,7 +244,7 @@ async function main() {
     throw new Error("Không tìm thấy nội dung chính sách trong data.policy");
   }
 
-  const normalized = policy.replaceAll("support@camamchuan.com", SUPPORT_EMAIL);
+  const normalized = policy.replaceAll("support@camamchuan.vn", SUPPORT_EMAIL);
   const html = pageTemplate(markdownToHtml(normalized));
 
   await writeFile(OUTPUT_PATH, html, "utf8");
