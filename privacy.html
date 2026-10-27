@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-lang="vi"
+  data-title-vi="Chính sách quyền riêng tư - Cảm Âm Chuẩn"
+  data-title-en="Privacy Policy - Cảm Âm Chuẩn"
+  data-description-vi="Chính sách quyền riêng tư của ứng dụng Cảm Âm Chuẩn trên iOS (Apple App Store) và Android (Google Play)."
+  data-description-en="Privacy Policy of the Cảm Âm Chuẩn app on iOS (Apple App Store) and Android (Google Play).">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chính sách quyền riêng tư - Cảm Âm Chuẩn</title>
   <meta name="description" content="Chính sách quyền riêng tư của ứng dụng Cảm Âm Chuẩn trên iOS (Apple App Store) và Android (Google Play).">
+  <script>
+    (function () {
+      var lang = "vi";
+      try {
+        var saved = localStorage.getItem("camamchuan.lang");
+        if (saved === "vi" || saved === "en") {
+          lang = saved;
+        } else if ((navigator.language || "vi").toLowerCase().indexOf("en") === 0) {
+          lang = "en";
+        }
+      } catch (error) {}
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+    })();
+  </script>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -18,6 +37,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 16px;
       max-width: 760px;
       margin: 0 auto;
@@ -30,12 +50,37 @@
       font-weight: 700;
       text-decoration: none;
     }
-    .site-header nav a {
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .site-nav a {
       color: #28785b;
       font-size: 14px;
       text-decoration: none;
     }
-    .site-header nav a:hover { text-decoration: underline; }
+    .site-nav a:hover { text-decoration: underline; }
+    .lang-switch {
+      display: inline-flex;
+      overflow: hidden;
+      border: 1px solid #cfe3da;
+      border-radius: 999px;
+    }
+    .lang-switch button {
+      border: 0;
+      background: transparent;
+      color: #28785b;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    html[data-lang="vi"] .lang-switch [data-set-lang="vi"],
+    html[data-lang="en"] .lang-switch [data-set-lang="en"] {
+      background: #28785b;
+      color: #fff;
+    }
     main {
       max-width: 760px;
       margin: 0 auto;
@@ -66,6 +111,8 @@
       text-align: center;
     }
     footer a { color: #28785b; }
+    html[data-lang="vi"] [data-lang="en"],
+    html[data-lang="en"] [data-lang="vi"] { display: none; }
     @media (max-width: 480px) {
       .site-header, main, footer { padding-left: 18px; padding-right: 18px; }
     }
@@ -74,13 +121,18 @@
 <body>
   <header class="site-header">
     <a class="brand" href="./index.html">Cảm Âm Chuẩn</a>
-    <nav>
-      <a href="./index.html">Trang hỗ trợ</a>
+    <nav class="site-nav">
+      <a href="./index.html" data-vi="Trang hỗ trợ" data-en="Support">Trang hỗ trợ</a>
+      <div class="lang-switch" role="group" aria-label="Language / Ngôn ngữ">
+        <button type="button" data-set-lang="vi" aria-pressed="true">VI</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
     </nav>
   </header>
 
   <main>
-    <article>
+    <section data-lang="vi">
+      <article>
 <h1>CHÍNH SÁCH QUYỀN RIÊNG TƯ (PRIVACY POLICY)</h1>
 <p><strong>Cập nhật lần cuối:</strong> Ngày 01 tháng 09 năm 2026<br> <strong>Ứng dụng:</strong> Cảm Âm Chuẩn (Cảm Âm Chuẩn Mobile)</p>
 <p>Cảm Âm Chuẩn (&quot;chúng tôi&quot;) cam kết bảo vệ quyền riêng tư và dữ liệu cá nhân của người dùng. Chính sách Quyền riêng tư này giải thích cách chúng tôi thu thập, sử dụng, lưu trữ và bảo vệ thông tin của bạn khi sử dụng ứng dụng di động <strong>Cảm Âm Chuẩn</strong> trên các nền tảng iOS (Apple App Store) và Android (Google Play Store).</p>
@@ -108,7 +160,7 @@
 <hr>
 <h3>5. Quyền của người dùng &amp; Xóa dữ liệu (Account &amp; Data Deletion)</h3>
 <p>Theo quy định của Apple App Store Guidelines (Mục 5.1.1(v)), Google Play Policy và Nghị định 13/2023/NĐ-CP Việt Nam, bạn có đầy đủ các quyền sau đối với dữ liệu của mình:</p>
-<ul><li><strong>Xem &amp; Cập nhật:</strong> Chỉnh sửa thông tin cá nhân ngay trong phần <em>Cài đặt tài khoản</em> của ứng dụng.</li><li><strong>Rút lại sự đồng ý:</strong> Bạn có thể tắt quyền truy cập Micro bất kỳ lúc nào trong phần <em>Cài đặt hệ thống (Settings &gt; Cảm Âm Chuẩn)</em> trên iOS/Android.</li><li><strong>Xóa tài khoản &amp; Dữ liệu vĩnh viễn:</strong> Bạn có quyền xóa toàn bộ tài khoản và dữ liệu liên quan khỏi hệ thống bất kỳ lúc nào.<ul><li><strong>Thực hiện trong App:</strong> Vào <strong>Cài đặt</strong> &gt; <strong>Quản lý tài khoản</strong> &gt; Chọn <strong>&quot;Xóa tài khoản&quot;</strong>.</li><li><strong>Thực hiện qua Email:</strong> Gửi yêu cầu xóa dữ liệu tới email <code>support@camamchuan.vn</code>. Dữ liệu sẽ được hủy vĩnh viễn trong vòng 7 ngày làm việc.</li></ul></li></ul>
+<ul><li><strong>Xem &amp; Cập nhật:</strong> Chỉnh sửa thông tin cá nhân ngay trong phần <em>Cài đặt tài khoản</em> của ứng dụng.</li><li><strong>Rút lại sự đồng ý:</strong> Bạn có thể tắt quyền truy cập Micro bất kỳ lúc nào trong phần <em>Cài đặt hệ thống (Settings &gt; Cảm Âm Chuẩn)</em> trên iOS/Android.</li><li><strong>Xóa tài khoản &amp; Dữ liệu vĩnh viễn:</strong> Bạn có quyền xóa toàn bộ tài khoản và dữ liệu liên quan khỏi hệ thống bất kỳ lúc nào.<ul><li><strong>Thực hiện trong App:</strong> Vào <strong>Cài đặt</strong> &gt; <strong>Quản lý tài khoản</strong> &gt; Chọn <strong>&quot;Xóa tài khoản&quot;</strong>.</li><li><strong>Thực hiện qua Email:</strong> Gửi yêu cầu xóa dữ liệu tới email <code>ndthien.1532000@gmail.com</code>. Dữ liệu sẽ được hủy vĩnh viễn trong vòng 7 ngày làm việc.</li></ul></li></ul>
 <hr>
 <h3>6. An toàn và Bảo mật Dữ liệu</h3>
 <p>Chúng tôi áp dụng các tiêu chuẩn bảo mật nghiêm ngặt để bảo vệ dữ liệu của bạn:</p>
@@ -122,12 +174,61 @@
 <hr>
 <h3>9. Thông tin liên hệ</h3>
 <p>Nếu có bất kỳ thắc mắc, khiếu nại hoặc yêu cầu liên quan đến Quyền riêng tư &amp; Bảo mật dữ liệu, vui lòng liên hệ với chúng tôi qua:</p>
-<ul><li><strong>Đơn vị vận hành:</strong> Cảm Âm Chuẩn Team</li><li><strong>Email hỗ trợ:</strong> <code>support@camamchuan.vn</code></li><li><strong>Website:</strong> <code>https://camamchuan.vn</code></li></ul>
-    </article>
+<ul><li><strong>Đơn vị vận hành:</strong> Cảm Âm Chuẩn Team</li><li><strong>Email hỗ trợ:</strong> <code>ndthien.1532000@gmail.com</code></li><li><strong>Website:</strong> <code>https://camamchuan.vn</code></li></ul>
+      </article>
+    </section>
+    <section data-lang="en">
+      <article>
+<h1>PRIVACY POLICY</h1>
+<p><strong>Last updated:</strong> September 01, 2026<br> <strong>App:</strong> Cảm Âm Chuẩn (Cảm Âm Chuẩn Mobile)</p>
+<p>Cảm Âm Chuẩn (&quot;we&quot;) is committed to protecting the privacy and personal data of our users. This Privacy Policy explains how we collect, use, store, and protect your information when you use the <strong>Cảm Âm Chuẩn</strong> mobile app on iOS (Apple App Store) and Android (Google Play Store).</p>
+<hr>
+<h3>1. Information We Collect</h3>
+<p>To provide the learning experience, audio processing, and account management, the app collects the following groups of information:</p>
+<h4>a. Identity &amp; Account Information</h4>
+<ul><li><strong>Registration information:</strong> Email, full name, avatar (when you create an account or sign in with Google / Sign in with Apple).</li><li><strong>Sign in with Apple:</strong> If you choose Apple's &quot;Hide My Email&quot; feature, we only receive a random email address provided by Apple to authenticate your account.</li></ul>
+<h4>b. Microphone Access &amp; Audio Data</h4>
+<ul><li><strong>Microphone access:</strong> The app requests microphone permission (<code>NSMicrophoneUsageDescription</code> on iOS) to provide the <strong>real-time note detection</strong> feature when you practice pressing notes and playing the flute/instrument.</li><li><strong>Audio processing commitment:</strong> Audio data from the microphone is <strong>only processed in real time directly on your device (Local On-Device)</strong>. We do <strong>NOT</strong> record, do <strong>NOT</strong> store audio files, and do <strong>NOT</strong> transmit your voice/instrument signals to any server.</li></ul>
+<h4>c. Learning &amp; Transaction Data</h4>
+<ul><li><strong>Learning progress:</strong> Practice history, scores, levels, saved melodies/songs.</li><li><strong>Payment information (In-App Purchase):</strong> All purchases of service packages/courses are processed directly through Apple's (App Store) or Google's (Google Play) payment systems. We do <strong>NOT</strong> collect or store your credit card or bank account information. We only receive a receipt code from Apple/Google to activate the corresponding feature.</li></ul>
+<h4>d. Technical &amp; Device Data</h4>
+<ul><li>Device information (device type, iOS/Android version, system language).</li><li>Crash logs and performance metrics for troubleshooting purposes.</li></ul>
+<hr>
+<h3>2. How We Use Information</h3>
+<p>We use the collected information for the following legitimate purposes:</p>
+<ul><li>Authenticate identity, create and manage user accounts.</li><li>Analyze audio frequencies in real time to serve the note detection algorithm.</li><li>Sync learning progress and practice history across your iOS/Android devices.</li><li>Process and activate paid packages (In-App Purchases).</li><li>Improve signal processing algorithm quality and fix technical issues.</li></ul>
+<hr>
+<h3>3. Advertising &amp; Tracking (App Tracking Transparency - ATT)</h3>
+<ul><li><strong>No Tracking:</strong> We do <strong>NOT</strong> use your data to track you across third-party apps or websites for targeted advertising.</li><li><strong>Use of IDFA (on iOS):</strong> If the app integrates an advertising identifier (IDFA), we will display Apple's <strong>App Tracking Transparency (ATT)</strong> permission prompt before accessing it. You have the full right to decline without affecting the app's core learning features.</li></ul>
+<hr>
+<h3>4. Sharing Data with Third Parties</h3>
+<p>We do <strong>NOT</strong> sell, rent, or share your personal data with third parties for commercial purposes. Data is only stored and processed securely through reputable cloud infrastructure service providers (such as Google Firebase, AWS, Cloudflare) to operate the app's backend system.</p>
+<hr>
+<h3>5. User Rights &amp; Data Deletion (Account &amp; Data Deletion)</h3>
+<p>In accordance with Apple App Store Guidelines (Section 5.1.1(v)), Google Play Policy, and Vietnam's Decree 13/2023/ND-CP, you have the following rights regarding your data:</p>
+<ul><li><strong>Access &amp; Update:</strong> Edit your personal information directly in the app's <em>Account Settings</em>.</li><li><strong>Withdraw consent:</strong> You can turn off microphone access at any time in <em>System Settings (Settings &gt; Cảm Âm Chuẩn)</em> on iOS/Android.</li><li><strong>Delete account &amp; data permanently:</strong> You have the right to delete your entire account and related data from the system at any time.<ul><li><strong>In the app:</strong> Go to <strong>Settings</strong> &gt; <strong>Account Management</strong> &gt; Select <strong>&quot;Delete Account&quot;</strong>.</li><li><strong>Via Email:</strong> Send a data deletion request to <code>ndthien.1532000@gmail.com</code>. Data will be permanently destroyed within 7 business days.</li></ul></li></ul>
+<hr>
+<h3>6. Data Safety and Security</h3>
+<p>We apply strict security standards to protect your data:</p>
+<ul><li>Encrypt all data transmitted between the app and server using HTTPS/TLS.</li><li>Strict database access permissions, applied only to automated operating systems.</li></ul>
+<hr>
+<h3>7. Children's Terms</h3>
+<p>The app does not intentionally collect personal information from children under 13 (or the equivalent age depending on local legal regulations) without parental or guardian consent. If we discover that children's data has been collected unintentionally, we will delete it immediately.</p>
+<hr>
+<h3>8. Changes to This Policy</h3>
+<p>This Privacy Policy may be updated from time to time to accommodate new features or changing legal regulations. Any changes will be published directly on this page along with the latest effective date.</p>
+<hr>
+<h3>9. Contact Information</h3>
+<p>If you have any questions, complaints, or requests regarding Privacy &amp; Data Security, please contact us at:</p>
+<ul><li><strong>Operator:</strong> Cảm Âm Chuẩn Team</li><li><strong>Support email:</strong> <code>ndthien.1532000@gmail.com</code></li><li><strong>Website:</strong> <code>https://camamchuan.vn</code></li></ul>
+      </article>
+    </section>
   </main>
 
   <footer>
     © 2026 Cảm Âm Chuẩn · <a href="mailto:ndthien.1532000@gmail.com">ndthien.1532000@gmail.com</a>
   </footer>
+
+  <script src="./assets/lang.js"></script>
 </body>
 </html>

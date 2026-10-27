@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const API_URL = "https://api-prod.pikzone.vn/api/v1/policy";
 const SUPPORT_EMAIL = "ndthien.1532000@gmail.com";
-const OUTPUT_PATH = join(dirname(fileURLToPath(import.meta.url)), "..", "privacy.html");
+const ROOT_DIR = join(dirname(fileURLToPath(import.meta.url)), "..");
+const OUTPUT_PATH = join(ROOT_DIR, "privacy.html");
+const EN_POLICY_PATH = join(ROOT_DIR, "content", "privacy.en.md");
 
 function escapeHtml(value) {
   return value
@@ -132,14 +134,33 @@ function markdownToHtml(markdown) {
   return blocks.join("\n");
 }
 
-function pageTemplate(content) {
+function pageTemplate(viContent, enContent) {
   return `<!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-lang="vi"
+  data-title-vi="Chính sách quyền riêng tư - Cảm Âm Chuẩn"
+  data-title-en="Privacy Policy - Cảm Âm Chuẩn"
+  data-description-vi="Chính sách quyền riêng tư của ứng dụng Cảm Âm Chuẩn trên iOS (Apple App Store) và Android (Google Play)."
+  data-description-en="Privacy Policy of the Cảm Âm Chuẩn app on iOS (Apple App Store) and Android (Google Play).">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chính sách quyền riêng tư - Cảm Âm Chuẩn</title>
   <meta name="description" content="Chính sách quyền riêng tư của ứng dụng Cảm Âm Chuẩn trên iOS (Apple App Store) và Android (Google Play).">
+  <script>
+    (function () {
+      var lang = "vi";
+      try {
+        var saved = localStorage.getItem("camamchuan.lang");
+        if (saved === "vi" || saved === "en") {
+          lang = saved;
+        } else if ((navigator.language || "vi").toLowerCase().indexOf("en") === 0) {
+          lang = "en";
+        }
+      } catch (error) {}
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+    })();
+  </script>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -153,6 +174,7 @@ function pageTemplate(content) {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 16px;
       max-width: 760px;
       margin: 0 auto;
@@ -165,12 +187,37 @@ function pageTemplate(content) {
       font-weight: 700;
       text-decoration: none;
     }
-    .site-header nav a {
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .site-nav a {
       color: #28785b;
       font-size: 14px;
       text-decoration: none;
     }
-    .site-header nav a:hover { text-decoration: underline; }
+    .site-nav a:hover { text-decoration: underline; }
+    .lang-switch {
+      display: inline-flex;
+      overflow: hidden;
+      border: 1px solid #cfe3da;
+      border-radius: 999px;
+    }
+    .lang-switch button {
+      border: 0;
+      background: transparent;
+      color: #28785b;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    html[data-lang="vi"] .lang-switch [data-set-lang="vi"],
+    html[data-lang="en"] .lang-switch [data-set-lang="en"] {
+      background: #28785b;
+      color: #fff;
+    }
     main {
       max-width: 760px;
       margin: 0 auto;
@@ -201,6 +248,8 @@ function pageTemplate(content) {
       text-align: center;
     }
     footer a { color: #28785b; }
+    html[data-lang="vi"] [data-lang="en"],
+    html[data-lang="en"] [data-lang="vi"] { display: none; }
     @media (max-width: 480px) {
       .site-header, main, footer { padding-left: 18px; padding-right: 18px; }
     }
@@ -209,26 +258,49 @@ function pageTemplate(content) {
 <body>
   <header class="site-header">
     <a class="brand" href="./index.html">Cảm Âm Chuẩn</a>
-    <nav>
-      <a href="./index.html">Trang hỗ trợ</a>
+    <nav class="site-nav">
+      <a href="./index.html" data-vi="Trang hỗ trợ" data-en="Support">Trang hỗ trợ</a>
+      <div class="lang-switch" role="group" aria-label="Language / Ngôn ngữ">
+        <button type="button" data-set-lang="vi" aria-pressed="true">VI</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
     </nav>
   </header>
 
   <main>
-    <article>
-${content}
-    </article>
+    <section data-lang="vi">
+      <article>
+${viContent}
+      </article>
+    </section>
+    <section data-lang="en">
+      <article>
+${enContent}
+      </article>
+    </section>
   </main>
 
   <footer>
     © 2026 Cảm Âm Chuẩn · <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>
   </footer>
+
+  <script src="./assets/lang.js"></script>
 </body>
 </html>
 `;
 }
 
 async function main() {
+  let policyEn;
+
+  try {
+    policyEn = await readFile(EN_POLICY_PATH, "utf8");
+  } catch (error) {
+    throw new Error(
+      `Không đọc được bản dịch tiếng Anh tại content/privacy.en.md: ${error.message}`
+    );
+  }
+
   const response = await fetch(API_URL, {
     headers: { Accept: "application/json" },
   });
@@ -244,8 +316,20 @@ async function main() {
     throw new Error("Không tìm thấy nội dung chính sách trong data.policy");
   }
 
-  const normalized = policy.replaceAll("support@camamchuan.vn", SUPPORT_EMAIL);
-  const html = pageTemplate(markdownToHtml(normalized));
+  if (policyEn.trim().length === 0) {
+    throw new Error("Bản dịch tiếng Anh content/privacy.en.md đang trống");
+  }
+
+  const normalizePolicy = (text) =>
+    text
+      .replaceAll("support@camamchuan.vn", SUPPORT_EMAIL)
+      .replaceAll("support@camamchuan.com", SUPPORT_EMAIL)
+      .replaceAll("https://camamchuan.com", "https://camamchuan.vn");
+
+  const html = pageTemplate(
+    markdownToHtml(normalizePolicy(policy)),
+    markdownToHtml(normalizePolicy(policyEn))
+  );
 
   await writeFile(OUTPUT_PATH, html, "utf8");
   console.log(`Đã cập nhật ${OUTPUT_PATH}`);

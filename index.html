@@ -1,47 +1,170 @@
-
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-lang="vi"
+  data-title-vi="Hỗ trợ - Cảm Âm Chuẩn"
+  data-title-en="Support - Cảm Âm Chuẩn"
+  data-description-vi="Trang hỗ trợ người dùng ứng dụng Cảm Âm Chuẩn."
+  data-description-en="Support page for the Cảm Âm Chuẩn app.">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hỗ trợ - Cảm Âm Chuẩn</title>
+  <meta name="description" content="Trang hỗ trợ người dùng ứng dụng Cảm Âm Chuẩn.">
+  <script>
+    (function () {
+      var lang = "vi";
+      try {
+        var saved = localStorage.getItem("camamchuan.lang");
+        if (saved === "vi" || saved === "en") {
+          lang = saved;
+        } else if ((navigator.language || "vi").toLowerCase().indexOf("en") === 0) {
+          lang = "en";
+        }
+      } catch (error) {}
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+    })();
+  </script>
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 680px;
-      margin: 60px auto;
-      padding: 0 24px;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.7;
       color: #222;
+      background: #fff;
     }
-    h1 { color: #28785b; }
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      border-bottom: 1px solid #e5efe9;
+    }
+    .brand {
+      color: #28785b;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .site-nav a {
+      color: #28785b;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .site-nav a:hover { text-decoration: underline; }
+    .lang-switch {
+      display: inline-flex;
+      overflow: hidden;
+      border: 1px solid #cfe3da;
+      border-radius: 999px;
+    }
+    .lang-switch button {
+      border: 0;
+      background: transparent;
+      color: #28785b;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    html[data-lang="vi"] .lang-switch [data-set-lang="vi"],
+    html[data-lang="en"] .lang-switch [data-set-lang="en"] {
+      background: #28785b;
+      color: #fff;
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+    h1 { color: #28785b; font-size: clamp(26px, 5vw, 36px); line-height: 1.3; }
+    h2 { color: #1f5f49; line-height: 1.4; }
     a { color: #28785b; }
-    footer { margin-top: 48px; color: #777; font-size: 14px; }
+    footer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px;
+      border-top: 1px solid #e5efe9;
+      color: #777;
+      font-size: 14px;
+      text-align: center;
+    }
+    html[data-lang="vi"] [data-lang="en"],
+    html[data-lang="en"] [data-lang="vi"] { display: none; }
+    @media (max-width: 480px) {
+      .site-header, main, footer { padding-left: 18px; padding-right: 18px; }
+    }
   </style>
 </head>
 <body>
-  <h1>Cảm Âm Chuẩn</h1>
-  <p>Trang hỗ trợ người dùng ứng dụng Cảm Âm Chuẩn.</p>
-  <p><a href="./privacy.html">Chính sách quyền riêng tư</a></p>
+  <header class="site-header">
+    <a class="brand" href="./index.html">Cảm Âm Chuẩn</a>
+    <nav class="site-nav">
+      <a href="./privacy.html" data-vi="Chính sách quyền riêng tư" data-en="Privacy Policy">Chính sách quyền riêng tư</a>
+      <div class="lang-switch" role="group" aria-label="Language / Ngôn ngữ">
+        <button type="button" data-set-lang="vi" aria-pressed="true">VI</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </header>
 
-  <h2>Liên hệ hỗ trợ</h2>
-  <p>
-    Nếu bạn gặp lỗi, cần trợ giúp hoặc muốn gửi phản hồi,
-    vui lòng liên hệ với chúng tôi qua email:
-  </p>
-  <p>
-    <a href="mailto:ndthien.1532000@gmail.com">ndthien.1532000@gmail.com</a>
-  </p>
+  <main>
+    <section data-lang="vi">
+      <h1>Cảm Âm Chuẩn</h1>
+      <p>Trang hỗ trợ người dùng ứng dụng Cảm Âm Chuẩn.</p>
+      <p><a href="./privacy.html">Chính sách quyền riêng tư</a></p>
 
-  <h2>Thông tin cần cung cấp</h2>
-  <p>
-    Khi báo lỗi, bạn có thể mô tả vấn đề gặp phải,
-    thiết bị đang sử dụng và các bước để tái hiện lỗi.
-  </p>
+      <h2>Liên hệ hỗ trợ</h2>
+      <p>
+        Nếu bạn gặp lỗi, cần trợ giúp hoặc muốn gửi phản hồi,
+        vui lòng liên hệ với chúng tôi qua email:
+      </p>
+      <p>
+        <a href="mailto:ndthien.1532000@gmail.com">ndthien.1532000@gmail.com</a>
+      </p>
+
+      <h2>Thông tin cần cung cấp</h2>
+      <p>
+        Khi báo lỗi, bạn có thể mô tả vấn đề gặp phải,
+        thiết bị đang sử dụng và các bước để tái hiện lỗi.
+      </p>
+    </section>
+
+    <section data-lang="en">
+      <h1>Cảm Âm Chuẩn</h1>
+      <p>Support page for the Cảm Âm Chuẩn app.</p>
+      <p><a href="./privacy.html">Privacy Policy</a></p>
+
+      <h2>Support contact</h2>
+      <p>
+        If you encounter a bug, need help, or want to send feedback,
+        please contact us by email:
+      </p>
+      <p>
+        <a href="mailto:ndthien.1532000@gmail.com">ndthien.1532000@gmail.com</a>
+      </p>
+
+      <h2>Information to include</h2>
+      <p>
+        When reporting a bug, please describe the issue you encountered,
+        the device you are using, and the steps to reproduce it.
+      </p>
+    </section>
+  </main>
 
   <footer>
     © 2026 Cảm Âm Chuẩn
   </footer>
+
+  <script src="./assets/lang.js"></script>
 </body>
 </html>
-
